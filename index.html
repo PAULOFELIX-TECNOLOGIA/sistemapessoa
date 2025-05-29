@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Sistema</title>
+    <script>
+        function login() {
+            var usuario = document.getElementById("usuario").value;
+            var senha = document.getElementById("senha").value;
+            
+            var requisicao = new XMLHttpRequest();
+            requisicao.open("GET", "controllerPessoa.php?cpf=" + usuario + "&senha="+senha+"&acao=validaPessoa");
+            requisicao.send();
+
+            requisicao.onload = function() {
+                var resposta = JSON.parse(this.responseText);
+                
+                if(resposta[0].cpf == usuario) {
+                    document.getElementById("login").style.display = "none";
+                    document.getElementById("menu").style.display = "block";
+                } 
+                
+            }
+        }
+            
+    </script>
+</head>
+<body>
+    <div id="login">    
+        <h2>Login</h2>
+        <input id="usuario" placeholder="Usuário"><br>
+        <input id="senha" type="password" placeholder="Senha"><br>
+        <button onclick="login()">Entrar</button>
+        <p id="resposta"></p>
+    </div>
+
+    <div id="menu" style="display: none;">
+        <h2>Bem-vindo!</h2>
+        <p>Escolha uma opção:</p>
+        <a href="viewPessoa.html"><button>Cadastro de Pessoa</button></a>
+        <a href="viewAgenda.html"><button>Cadastro de Agenda</button></a>
+    </div>
+</body>
+</html>
