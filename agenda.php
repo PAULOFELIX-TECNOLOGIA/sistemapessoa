@@ -1,7 +1,7 @@
 <?php
     //Objeto Entidade Agenda
     class Agenda{   
-        private $cpf, $data, $descricao;
+        private $cpf, $data, $descricao, $nome, $contato;
 
         public function getCpf(){
             return $this->cpf;
@@ -23,5 +23,20 @@
         public function setDescricao($descricao){
             $this->descricao = $descricao;
         }
-    }
+
+        public function getNome(){
+            return $this->nome;
+        }
+        public function setNome($nome){
+            $this->nome = $nome;
+        }
+
+        public function getContato(){
+            return $this->contato;
+        }
+        public function setContato($contato){
+            $this->contato = $contato;
+        }
+
+    }   
 ?>

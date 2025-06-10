@@ -3,7 +3,7 @@
     //DAO - CRUD - create, read, update, delete
     class ModelPessoa{
         public function inserir(Pessoa $pessoa){
-            $sql = "insert into pessoa(cpf, nome, contato) values(?, ?, ?)";
+            $sql = "insert into pessoa(cpf, nome, contato, senha) values(?, ?, ?, ?)";
             $con = new Conexao();
             $bd = $con->pegarConexao();
 
@@ -11,6 +11,7 @@
             $stm->bindValue(1, $pessoa->getCpf());
             $stm->bindValue(2, $pessoa->getNome());
             $stm->bindValue(3, $pessoa->getContato());
+            $stm->bindValue(4, $pessoa->getSenha());
             $resultado = $stm->execute();
             if($resultado){
                 echo "cadastrado com sucesso";
@@ -35,14 +36,15 @@
         }
 
         public function atualizar(Pessoa $pessoa){
-            $sql = "update pessoa set nome=?, contato=? where cpf=?";
+            $sql = "update pessoa set nome=?, contato=?, senha=? where cpf=?";
             $con = new Conexao();
             $bd = $con->pegarConexao();
 
             $stm = $bd->prepare($sql);
             $stm->bindValue(1, $pessoa->getNome());
             $stm->bindValue(2, $pessoa->getContato());
-            $stm->bindValue(3, $pessoa->getCpf());
+            $stm->bindValue(3, $pessoa->getSenha());
+            $stm->bindValue(4, $pessoa->getCpf());
             $resultado = $stm->execute();
             if($resultado){
                 echo "atualizado com sucesso";
